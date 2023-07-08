@@ -4,6 +4,9 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GithubProvider from "next-auth/providers/github";
 import TwitterProvider from "next-auth/providers/twitter";
 import Auth0Provider from "next-auth/providers/auth0";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/utils/prisma";
+import { Adapter } from "next-auth/adapters";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -33,11 +36,12 @@ export const authOptions: NextAuthOptions = {
     //   version: "2.0",
     // }),
   ],
+  adapter: PrismaAdapter(prisma) as Adapter,
   callbacks: {
-    async jwt({ token, profile, account }) {
+    // async jwt({ token, profile, account }) {
       
-      return token;
-    },
+    //   return token;
+    // },
     // async session({ session, token, user }) {
     //   // Send properties to the client, like an access_token and user id from a provider.
     //   return {
